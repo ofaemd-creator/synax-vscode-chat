@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/hero.jpg" alt="SYNAX Chat & Studio IDE v2.0.0 — Native VS Code & Antigravity Extension" width="100%">
+</p>
+
 # 💬 SYNAX Chat & Studio IDE for VS Code / Antigravity (`synax-vscode-chat` v2.0.0)
 
 [![Cross-Platform CI](https://github.com/ofaemd-creator/synax-vscode-chat/actions/workflows/ci.yml/badge.svg)](https://github.com/ofaemd-creator/synax-vscode-chat/actions)
