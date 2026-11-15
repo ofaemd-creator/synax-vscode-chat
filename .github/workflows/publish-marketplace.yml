@@ -1,0 +1,33 @@
+name: Publish Extension to VS Code Marketplace & Open VSX
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Publish to Microsoft VS Code Marketplace (if VSCE_PAT set)
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
+        run: |
+          if [ -n "$VSCE_PAT" ]; then
+            npx --yes @vscode/vsce publish --packagePath synax-vscode-chat-2.0.0.vsix -p "$VSCE_PAT"
+          else
+            echo "VSCE_PAT secret not configured yet; skipping Microsoft Marketplace upload."
+          fi
+      - name: Publish to Open VSX Registry (if OVSX_PAT set)
+        env:
+          OVSX_PAT: ${{ secrets.OVSX_PAT }}
+        run: |
+          if [ -n "$OVSX_PAT" ]; then
+            npx --yes ovsx publish synax-vscode-chat-2.0.0.vsix -p "$OVSX_PAT"
+          else
+            echo "OVSX_PAT secret not configured yet; skipping Open VSX upload."
+          fi
